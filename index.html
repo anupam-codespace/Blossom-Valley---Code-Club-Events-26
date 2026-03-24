@@ -9,7 +9,7 @@
   <meta name="theme-color" content="#1a0a12"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@1,300;1,400;1,500;1,600&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <link rel="stylesheet" href="style.css"/>
@@ -20,33 +20,7 @@
 <div id="loading-screen">
   <canvas id="loading-petals"></canvas>
   <div class="ls-center">
-    <svg class="sakura-bloom" id="sakura-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="pg" cx="35%" cy="25%">
-          <stop offset="0%" stop-color="#fff5f8"/>
-          <stop offset="55%" stop-color="#ffb7c5"/>
-          <stop offset="100%" stop-color="#ff6b9d"/>
-        </radialGradient>
-        <radialGradient id="cg" cx="50%" cy="50%">
-          <stop offset="0%" stop-color="#ffe57f"/>
-          <stop offset="100%" stop-color="#ffab40"/>
-        </radialGradient>
-        <filter id="pf"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-      </defs>
-      <g transform="translate(100,100)">
-        <g class="sp" transform="rotate(0,100,100)"><ellipse cx="0" cy="-42" rx="20" ry="38" fill="url(#pg)" filter="url(#pf)"/></g>
-        <g class="sp" transform="rotate(72,100,100)"><ellipse cx="0" cy="-42" rx="20" ry="38" fill="url(#pg)" filter="url(#pf)"/></g>
-        <g class="sp" transform="rotate(144,100,100)"><ellipse cx="0" cy="-42" rx="20" ry="38" fill="url(#pg)" filter="url(#pf)"/></g>
-        <g class="sp" transform="rotate(216,100,100)"><ellipse cx="0" cy="-42" rx="20" ry="38" fill="url(#pg)" filter="url(#pf)"/></g>
-        <g class="sp" transform="rotate(288,100,100)"><ellipse cx="0" cy="-42" rx="20" ry="38" fill="url(#pg)" filter="url(#pf)"/></g>
-        <circle class="sc" cx="0" cy="0" r="16" fill="url(#cg)" filter="url(#pf)"/>
-        <circle class="sd" cx="0" cy="-7" r="2.5" fill="#ffd740"/>
-        <circle class="sd" cx="6.7" cy="-3.5" r="2.5" fill="#ffd740"/>
-        <circle class="sd" cx="4.1" cy="5.5" r="2.5" fill="#ffbe40"/>
-        <circle class="sd" cx="-4.1" cy="5.5" r="2.5" fill="#ffbe40"/>
-        <circle class="sd" cx="-6.7" cy="-3.5" r="2.5" fill="#ffd740"/>
-      </g>
-    </svg>
+
     <div class="ls-text">
       <div class="ls-club bvec-brand" style="align-items:center"><span class="b-w">&lt;bvec/&gt;</span><span class="b-y">{Code Club}</span></div>
       <div class="ls-event">RESPLANDOR 2026</div>
@@ -94,7 +68,7 @@
         <span class="hero-prefix">WE CODE.</span>
         <span class="hero-spin" id="rotating-text">WE TYPE.</span>
       </div>
-      <h1 class="hero-title">WE <span class="sakura-text">CONQUER.</span></h1>
+      <h1 class="hero-title">WE <span class="sakura-text">BLOOM.</span></h1>
       <p class="hero-subtitle">Two elite championships in Blossom Valley.<br/>
         <span class="sakura-text">Typing Quest</span> &amp; <span class="cherry-text">AlgoQuest</span> — March 2026.
       </p>
@@ -103,7 +77,7 @@
           <div><span class="pill-title">Typing Quest</span><span class="pill-date">24 Mar · Online · 7 PM</span></div>
         </a>
         <a href="#algoquest" class="hpill algo-pill">
-          <div><span class="pill-title">AlgoQuest</span><span class="pill-date">27 Mar · CSE Hall · 1:30 PM</span></div>
+          <div><span class="pill-title">AlgoQuest</span><span class="pill-date">27 Mar · CSE Classroom · 11:30 AM</span></div>
         </a>
       </div>
       <div class="hero-cta-group">
@@ -136,7 +110,7 @@
           <div class="prize-amount">
             <span class="prize-cur">₹</span>
             <span class="prize-digits" id="prize-digits">6,000</span>
-            <span class="prize-plus">+</span>
+            <span class="prize-plus">*</span>
           </div>
           <p class="prize-tagline">"Two events. Two battlefields. One festival."</p>
           <div class="prize-split">
@@ -177,7 +151,36 @@
             <div class="mi"><div><span class="ml">Date</span><span class="mv">24 March 2026</span></div></div>
             <div class="mi"><div><span class="ml">Time</span><span class="mv">7:00 PM (Online)</span></div></div>
             <div class="mi"><div><span class="ml">Mode</span><span class="mv">Online</span></div></div>
+            <div class="mi"><div><span class="ml">Platform</span><span class="mv">typer.io</span></div></div>
             <div class="mi"><div><span class="ml">Prize Pool</span><span class="mv prize-val typing-prize">₹3,000</span></div></div>
+          </div>
+          <!-- TYPING QUEST COUNTDOWN -->
+          <div class="cd-wrap cd-typing" id="cd-typing-wrap">
+            <div class="cd-header">
+              <span class="cd-dot cd-dot-typing"></span>
+              <span class="cd-label" id="cd-typing-label">Event starts in</span>
+            </div>
+            <div class="cd-units">
+              <div class="cd-unit">
+                <span class="cd-val cd-val-typing" id="cd-t-d">00</span>
+                <span class="cd-lbl">Days</span>
+              </div>
+              <span class="cd-sep cd-sep-typing">:</span>
+              <div class="cd-unit">
+                <span class="cd-val cd-val-typing" id="cd-t-h">00</span>
+                <span class="cd-lbl">Hours</span>
+              </div>
+              <span class="cd-sep cd-sep-typing">:</span>
+              <div class="cd-unit">
+                <span class="cd-val cd-val-typing" id="cd-t-m">00</span>
+                <span class="cd-lbl">Mins</span>
+              </div>
+              <span class="cd-sep cd-sep-typing">:</span>
+              <div class="cd-unit">
+                <span class="cd-val cd-val-typing" id="cd-t-s">00</span>
+                <span class="cd-lbl">Secs</span>
+              </div>
+            </div>
           </div>
           <p class="ev-desc">Three intense typing rounds with a fixed passage including punctuation. Winners decided on accuracy + WPM. Winners receive <strong class="sakura-text">Trophies &amp; Certificates</strong>.</p>
           <div class="pb-card typing-pb">
@@ -235,9 +238,38 @@
         <div class="card-body">
           <div class="event-meta">
             <div class="mi"><div><span class="ml">Date</span><span class="mv">27 March 2026</span></div></div>
-            <div class="mi"><div><span class="ml">Time</span><span class="mv">1:30 PM onwards</span></div></div>
-            <div class="mi"><div><span class="ml">Venue</span><span class="mv">CSE Seminar Hall, BVEC</span></div></div>
+            <div class="mi"><div><span class="ml">Time</span><span class="mv">11:30 AM onwards</span></div></div>
+            <div class="mi"><div><span class="ml">Venue</span><span class="mv">CSE Classroom, BVEC</span></div></div>
+            <div class="mi"><div><span class="ml">Platform</span><span class="mv">HackerRank</span></div></div>
             <div class="mi"><div><span class="ml">Prize Pool</span><span class="mv prize-val cherry-prize">₹3,000</span></div></div>
+          </div>
+          <!-- ALGOQUEST COUNTDOWN -->
+          <div class="cd-wrap cd-algo" id="cd-algo-wrap">
+            <div class="cd-header">
+              <span class="cd-dot cd-dot-algo"></span>
+              <span class="cd-label" id="cd-algo-label">Event starts in</span>
+            </div>
+            <div class="cd-units">
+              <div class="cd-unit">
+                <span class="cd-val cd-val-algo" id="cd-a-d">00</span>
+                <span class="cd-lbl">Days</span>
+              </div>
+              <span class="cd-sep cd-sep-algo">:</span>
+              <div class="cd-unit">
+                <span class="cd-val cd-val-algo" id="cd-a-h">00</span>
+                <span class="cd-lbl">Hours</span>
+              </div>
+              <span class="cd-sep cd-sep-algo">:</span>
+              <div class="cd-unit">
+                <span class="cd-val cd-val-algo" id="cd-a-m">00</span>
+                <span class="cd-lbl">Mins</span>
+              </div>
+              <span class="cd-sep cd-sep-algo">:</span>
+              <div class="cd-unit">
+                <span class="cd-val cd-val-algo" id="cd-a-s">00</span>
+                <span class="cd-lbl">Secs</span>
+              </div>
+            </div>
           </div>
           <p class="ev-desc">A DSA and algorithms challenge where participants solve multiple coding problems under time pressure. Ranked by problems solved then completion time. Winners receive <strong class="cherry-text">Trophies &amp; Certificates</strong>.</p>
           <div class="pb-card algo-pb">
@@ -247,12 +279,14 @@
             <div class="pb-item cert"><span class="pbr">All</span><span class="pba">Certificates</span></div>
           </div>
           <div class="details-grid">
-            <div class="dc"><h4 class="dt">Rules</h4>
+            <div class="dc"><h4 class="dt">Rules & Judging</h4>
               <ul class="rules-list">
-                <li><span class="ri">◈</span> No AI tools allowed</li>
-                <li><span class="ri">◈</span> No plagiarism</li>
-                <li><span class="ri">◈</span> Pure problem-solving only</li>
-                <li><span class="ri">◈</span> Bring valid ID</li>
+                <li><span class="ri">◈</span> Score = test cases passed per challenge</li>
+                <li><span class="ri">◈</span> Highest score from multiple submissions counts</li>
+                <li><span class="ri">◈</span> Tie-breaker: shortest total time to final high score</li>
+                <li><span class="ri">◈</span> Strictly NO plagiarism</li>
+                <li><span class="ri">◈</span> NO external AI tools — instant disqualification</li>
+                <li><span class="ri">◈</span> Bring valid College ID</li>
               </ul>
             </div>
             <div class="dc"><h4 class="dt">Registration</h4>
@@ -291,11 +325,11 @@
       </div>
       <div class="reg-buttons reveal">
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdd5g5W_dptck1bv_anZCanGRsxAZAiGd3BT7CWx9CvKENFMg/viewform?usp=dialog" target="_blank" rel="noopener" class="btn btn-sakura btn-reg" id="reg-typing-btn">
-          <div class="rbi"><div><span class="rbt">Register for Typing Quest</span><span class="rbs">24 Mar · Free / ₹19 · Online · 7:00 PM</span></div></div>
+          <div class="rbi"><div><span class="rbt">Register for Typing Quest</span><span class="rbs">24 Mar · Free / ₹19 · Online · 7:00 PM · typer.io</span></div></div>
           <span class="ba">→</span><span class="btn-glow"></span>
         </a>
         <a href="https://forms.gle/cGGcHwJPsMgySq1JA" target="_blank" rel="noopener" class="btn btn-cherry btn-reg" id="reg-algo-btn">
-          <div class="rbi"><div><span class="rbt">Register for AlgoQuest</span><span class="rbs">27 Mar · Free · CSE Seminar Hall · 1:30 PM</span></div></div>
+          <div class="rbi"><div><span class="rbt">Register for AlgoQuest</span><span class="rbs">27 Mar · Free · CSE Classroom, BVEC · 11:30 AM · HackerRank</span></div></div>
           <span class="ba">→</span><span class="btn-glow"></span>
         </a>
       </div>
@@ -321,9 +355,9 @@
         </div>
         <div class="footer-info">
           <h4 class="fc-title">Event Info</h4>
-          <p>Typing Quest – 24 March @ 7PM Online</p>
-          <p>AlgoQuest – 27 March @ 1:30PM</p>
-          <p>CSE Seminar Hall, BVEC</p>
+          <p>Typing Quest – 24 March @ 7PM Online · typer.io</p>
+          <p>AlgoQuest – 27 March @ 11:30 AM onwards</p>
+          <p>CSE Classroom, BVEC · Platform: HackerRank</p>
           <p style="margin-top:.75rem"><a href="mailto:bveccodeclubofficial@gmail.com" class="footer-link">bveccodeclubofficial@gmail.com</a></p>
           <p><a href="tel:+917002081304" class="footer-link-dim">+91 70020 81304</a></p>
         </div>
@@ -344,6 +378,12 @@
       <div class="footer-bottom">
         <div class="footer-glow-line"></div>
         <p class="footer-copy">Designed &amp; Engineered by <span class="sakura-text">BVEC Code Club – Resplandor 2026 Team</span></p>
+        <div class="last-updated-badge">
+          <span class="lu-icon">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><circle cx="8" cy="8" r="6.5"/><path d="M8 4.5v3.75l2.5 1.5"/></svg>
+          </span>
+          <span class="lu-text">Last updated:&nbsp;<time class="lu-time" id="lu-time">24 March 2026, 2:14 PM IST</time></span>
+        </div>
         <p class="footer-rights">© 2026 BVEC Code Club. All rights reserved.</p>
       </div>
     </div>
@@ -365,3 +405,4 @@
 <script src="script.js"></script>
 </body>
 </html>
+
