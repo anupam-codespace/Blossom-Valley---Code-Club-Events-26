@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Typing Quest Results | Resplandor 2026</title>
+  <meta name="theme-color" content="#1a0a12"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@1,300;1,400;1,500;1,600&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .results-section {
+      padding: 8rem 0 4rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    .leaderboard-card {
+      width: 100%;
+      max-width: 800px;
+      border-radius: 20px;
+      background: rgba(10,4,14,.9);
+      border: 1px solid var(--gborder);
+      backdrop-filter: blur(20px);
+      padding: 3rem;
+      margin-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .leaderboard-title {
+      font-family: var(--font-d);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--sakura);
+      text-align: center;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 20px rgba(255,107,157,.4);
+    }
+    .rank-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .rank-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 2rem;
+      background: rgba(255,107,157,.05);
+      border: 1px solid rgba(255,107,157,.15);
+      border-radius: 12px;
+      transition: transform 0.3s;
+    }
+    .rank-item:hover {
+      transform: translateX(10px);
+      background: rgba(255,107,157,.1);
+      border-color: rgba(255,107,157,.3);
+    }
+    .rank-1 {
+      border-color: rgba(255,215,64,.4);
+      background: rgba(255,215,64,.08);
+      box-shadow: 0 0 20px rgba(255,215,64,.1);
+    }
+    .rank-2 {
+      border-color: rgba(148,163,184,.4);
+      background: rgba(148,163,184,.08);
+    }
+    .rank-3 {
+      border-color: rgba(205,127,50,.4);
+      background: rgba(205,127,50,.08);
+    }
+    .rank-info {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .rank-number {
+      font-family: var(--font-d);
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--textmut);
+    }
+    .rank-1 .rank-number { color: var(--gold); text-shadow: 0 0 10px rgba(255,215,64,.5); }
+    .rank-2 .rank-number { color: #94a3b8; }
+    .rank-3 .rank-number { color: #cd7f32; }
+    
+    .participant-details {
+      display: flex;
+      flex-direction: column;
+    }
+    .participant-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.05em;
+    }
+    .participant-id {
+      font-size: 0.85rem;
+      color: var(--text2);
+      font-family: 'Share Tech Mono', monospace;
+    }
+    .ranking-score {
+      font-family: var(--font-d);
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--sakura);
+    }
+    .wpm-text {
+      font-size: 0.8rem;
+      color: var(--textmut);
+      letter-spacing: 0.1em;
+    }
+    .event-info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 800px;
+      margin-bottom: 3rem;
+    }
+    .info-box {
+      background: rgba(0,0,0,.3);
+      border: 1px solid var(--gborder);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .info-box-title {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--sakura);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .info-box-value {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .congratulations-msg {
+      text-align: center;
+      font-family: var(--font-h);
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--text2);
+      margin-top: 2.5rem;
+    }
+    @media(max-width: 768px) {
+      .rank-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .ranking-score {
+        align-self: flex-end;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOADING SCREEN -->
+<div id="loading-screen">
+  <canvas id="loading-petals"></canvas>
+  <div class="ls-center">
+    <div class="ls-text">
+      <div class="ls-club bvec-brand" style="align-items:center"><span class="b-w">&lt;bvec/&gt;</span><span class="b-y">{Code Club}</span></div>
+      <div class="ls-event">RESPLANDOR 2026</div>
+      <div class="ls-sub">Blossom Valley</div>
+    </div>
+    <div class="ls-progress"><div class="ls-bar" id="ls-bar"></div></div>
+    <div class="ls-status" id="ls-status">Blooming...</div>
+  </div>
+</div>
+
+<canvas id="petal-canvas"></canvas>
+
+<div id="main-site" style="display:none;opacity:0">
+
+  <!-- NAVBAR -->
+  <nav class="navbar scrolled" id="navbar" style="background:rgba(6,2,10,.88);backdrop-filter:blur(20px);border-color:var(--gborder);">
+    <a href="index.html" class="nav-logo bvec-brand">
+      <span class="b-w">&lt;bvec/&gt;</span>
+      <span class="b-y">{Code Club}</span>
+    </a>
+    <ul class="nav-links" id="nav-links" style="margin-left:auto; margin-right:auto;">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="algo-quest.html">AlgoQuest</a></li>
+      <li><a href="typing-quest.html" style="color:var(--text);border-bottom:1px solid var(--sakura);">Typing Quest</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- TYPING QUEST RESULTS SECTION -->
+  <section class="results-section container">
+    <div class="section-label" style="margin-top: 2rem;">// EVENT COMPLETION & RESULTS</div>
+    
+    <div class="event-info-grid reveal">
+      <div class="info-box">
+        <div class="info-box-title">Event Status</div>
+        <div class="info-box-value" style="color:var(--textmut);">Closed</div>
+      </div>
+      <div class="info-box">
+        <div class="info-box-title">Total Rounds</div>
+        <div class="info-box-value">3 Online Rounds</div>
+      </div>
+      <div class="info-box">
+        <div class="info-box-title">Participation</div>
+        <div class="info-box-value">150+ Registered</div>
+      </div>
+    </div>
+
+    <div class="leaderboard-card reveal">
+      <h2 class="leaderboard-title">Typing Contest Leaderboard</h2>
+      <p style="text-align:center; color:var(--text2); margin-bottom: 2rem; font-size: 0.9rem;">Final Ranking based on average WPM and Accuracy</p>
+      
+      <div class="rank-list">
+        <!-- Rank 1 -->
+        <div class="rank-item rank-1">
+          <div class="rank-info">
+            <div class="rank-number">1</div>
+            <div class="participant-details">
+              <span class="participant-name">Prabhangshu Sekhar Kashyap</span>
+              <span class="participant-id">mr_psk</span>
+            </div>
+          </div>
+          <div class="ranking-score">
+            75.206 <span class="wpm-text">WPM</span>
+          </div>
+        </div>
+        
+        <!-- Rank 2 -->
+        <div class="rank-item rank-2">
+          <div class="rank-info">
+            <div class="rank-number">2</div>
+            <div class="participant-details">
+              <span class="participant-name">Ashwash Bora</span>
+              <span class="participant-id">be fr gang</span>
+            </div>
+          </div>
+          <div class="ranking-score">
+            73.886 <span class="wpm-text">WPM</span>
+          </div>
+        </div>
+        
+        <!-- Rank 3 -->
+        <div class="rank-item rank-3">
+          <div class="rank-info">
+            <div class="rank-number">3</div>
+            <div class="participant-details">
+              <span class="participant-name">Madhurjya Deep Chakravarty</span>
+              <span class="participant-id">madhurjyadeepch</span>
+            </div>
+          </div>
+          <div class="ranking-score">
+            73.526 <span class="wpm-text">WPM</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="congratulations-msg">Congratulations to all participants for a fierce competition.</p>
+    </div>
+
+    <div class="reveal">
+      <a href="index.html" class="btn btn-sakura">Return to Home <span class="btn-glow"></span><span class="ba">→</span></a>
+    </div>
+
+  </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

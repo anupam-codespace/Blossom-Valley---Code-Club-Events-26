@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AlgoQuest Details | Resplandor 2026</title>
+  <meta name="theme-color" content="#1a0a12"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@1,300;1,400;1,500;1,600&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .details-section {
+      padding: 8rem 0 4rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    .upcoming-card {
+      width: 100%;
+      max-width: 800px;
+      border-radius: 20px;
+      background: rgba(10,4,14,.9);
+      border: 1px solid rgba(233,30,99,.25);
+      backdrop-filter: blur(20px);
+      padding: 3.5rem;
+      margin-bottom: 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(233,30,99,.1);
+    }
+    .upcoming-title {
+      font-family: var(--font-d);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--cherry2);
+      margin-bottom: 1rem;
+      text-shadow: 0 0 20px rgba(233,30,99,.4);
+    }
+    .upcoming-subtitle {
+      font-size: 1.1rem;
+      color: var(--text2);
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 100px;
+      background: rgba(34,197,94,.1);
+      border: 1px solid rgba(34,197,94,.3);
+      color: #4ade80;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 8px #4ade80;
+      animation: blink 1.5s infinite;
+    }
+    .event-info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      margin-bottom: 3rem;
+      text-align: left;
+    }
+    .info-box {
+      background: rgba(0,0,0,.3);
+      border: 1px solid var(--gborder);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+    .info-box-title {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--cherry2);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .info-box-value {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .updates-notice {
+      padding: 1.5rem;
+      background: rgba(233,30,99,.05);
+      border: 1px dashed rgba(233,30,99,.3);
+      border-radius: 12px;
+      font-style: italic;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOADING SCREEN -->
+<div id="loading-screen">
+  <canvas id="loading-petals"></canvas>
+  <div class="ls-center">
+    <div class="ls-text">
+      <div class="ls-club bvec-brand" style="align-items:center"><span class="b-w">&lt;bvec/&gt;</span><span class="b-y">{Code Club}</span></div>
+      <div class="ls-event">RESPLANDOR 2026</div>
+      <div class="ls-sub">Blossom Valley</div>
+    </div>
+    <div class="ls-progress"><div class="ls-bar" id="ls-bar"></div></div>
+    <div class="ls-status" id="ls-status">Blooming...</div>
+  </div>
+</div>
+
+<canvas id="petal-canvas"></canvas>
+
+<div id="main-site" style="display:none;opacity:0">
+
+  <!-- NAVBAR -->
+  <nav class="navbar scrolled" id="navbar" style="background:rgba(6,2,10,.88);backdrop-filter:blur(20px);border-color:var(--gborder);">
+    <a href="index.html" class="nav-logo bvec-brand">
+      <span class="b-w">&lt;bvec/&gt;</span>
+      <span class="b-y">{Code Club}</span>
+    </a>
+    <ul class="nav-links" id="nav-links" style="margin-left:auto; margin-right:auto;">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="algo-quest.html" style="color:var(--text);border-bottom:1px solid var(--sakura);">AlgoQuest</a></li>
+      <li><a href="typing-quest.html">Typing Quest</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ALGOQUEST DETAILS SECTION -->
+  <section class="details-section container">
+    <div class="section-label" style="margin-top:2rem;">// EVENT DETAILS</div>
+    
+    <div class="upcoming-card reveal">
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        Registrations Open
+      </div>
+      
+      <h2 class="upcoming-title">AlgoQuest</h2>
+      <p class="upcoming-subtitle">The ultimate Coding Arena. Solve algorithmic challenges, test your logic, and climb to the top of the leaderboard.</p>
+      
+      <div class="event-info-grid">
+        <div class="info-box">
+          <div class="info-box-title">Date</div>
+          <div class="info-box-value">27 March 2026</div>
+        </div>
+        <div class="info-box">
+          <div class="info-box-title">Time</div>
+          <div class="info-box-value">11:30 AM onwards</div>
+        </div>
+        <div class="info-box">
+          <div class="info-box-title">Venue</div>
+          <div class="info-box-value">CSE Classroom</div>
+        </div>
+        <div class="info-box">
+          <div class="info-box-title">Platform</div>
+          <div class="info-box-value">HackerRank</div>
+        </div>
+      </div>
+
+      <p class="ev-desc" style="text-align:left; margin-bottom: 2rem;">A DSA and algorithms challenge where participants solve multiple coding problems under time pressure. Ranked by problems solved then completion time. Winners receive <strong class="cherry-text">Trophies &amp; Certificates</strong>.</p>
+      
+      <div class="pb-card algo-pb" style="text-align:left; margin-bottom: 2.5rem;">
+        <div class="pb-item gold"><span class="pbr">1st</span><span class="pba">₹1,500</span></div>
+        <div class="pb-item silver"><span class="pbr">2nd</span><span class="pba">₹1,000</span></div>
+        <div class="pb-item bronze"><span class="pbr">3rd</span><span class="pba">₹500</span></div>
+        <div class="pb-item cert"><span class="pbr">All</span><span class="pba">Certificates</span></div>
+      </div>
+      
+      <div class="details-grid" style="text-align:left; margin-bottom: 3rem;">
+        <div class="dc"><h4 class="dt">Rules & Judging</h4>
+          <ul class="rules-list">
+            <li><span class="ri">◈</span> Score = test cases passed per challenge</li>
+            <li><span class="ri">◈</span> Highest score from multiple submissions counts</li>
+            <li><span class="ri">◈</span> Tie-breaker: shortest total time to final high score</li>
+            <li><span class="ri">◈</span> Strictly NO plagiarism</li>
+            <li><span class="ri">◈</span> NO external AI tools — instant disqualification</li>
+            <li><span class="ri">◈</span> Bring valid College ID</li>
+          </ul>
+        </div>
+        <div class="dc"><h4 class="dt">Registration</h4>
+          <ul class="reg-list">
+            <li><span class="free-badge">FREE</span> BVEC Students</li>
+            <li><span class="fee-badge">FEE</span> Outside Participants</li>
+          </ul>
+          <h4 class="dt" style="margin-top:1.5rem">Coordinators</h4>
+          <ul class="coord-list">
+            <li><span class="cn">Vivek Dubey</span><a href="tel:+916002265204" class="cp">+91 60022 65204</a></li>
+            <li><span class="cn">Abhishek Mazumder</span><a href="tel:+918822344140" class="cp">+91 88223 44140</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="updates-notice" style="text-align:left;">
+        Updates regarding participants, specific rounds, results and standings will be active and available soon here. Stay tuned!
+      </div>
+    </div>
+
+    <div class="reveal">
+      <a href="index.html" class="btn btn-cherry">Return to Home <span class="btn-glow"></span><span class="ba">→</span></a>
+    </div>
+
+  </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
