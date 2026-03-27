@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AlgoQuest Details | Resplandor 2026</title>
+  <title>AlgoQuest Results | Resplandor 2026</title>
   <meta name="theme-color" content="#1a0a12"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -12,7 +12,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <link rel="stylesheet" href="style.css"/>
   <style>
-    .details-section {
+    .results-section {
       padding: 8rem 0 4rem;
       min-height: 100vh;
       display: flex;
@@ -20,70 +20,109 @@
       align-items: center;
       position: relative;
     }
-    .upcoming-card {
+    .leaderboard-card {
       width: 100%;
       max-width: 800px;
       border-radius: 20px;
       background: rgba(10,4,14,.9);
-      border: 1px solid rgba(233,30,99,.25);
+      border: 1px solid var(--gborder);
       backdrop-filter: blur(20px);
-      padding: 3.5rem;
+      padding: 3rem;
       margin-bottom: 3rem;
-      text-align: center;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 10px 40px rgba(233,30,99,.1);
     }
-    .upcoming-title {
+    .leaderboard-title {
       font-family: var(--font-d);
-      font-size: 2.5rem;
+      font-size: 2rem;
       font-weight: 800;
       color: var(--cherry2);
-      margin-bottom: 1rem;
+      text-align: center;
+      margin-bottom: 2rem;
       text-shadow: 0 0 20px rgba(233,30,99,.4);
     }
-    .upcoming-subtitle {
-      font-size: 1.1rem;
-      color: var(--text2);
-      line-height: 1.6;
-      margin-bottom: 2.5rem;
+    .rank-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
     }
-    .status-badge {
-      display: inline-flex;
+    .rank-item {
+      display: flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.6rem 1.2rem;
-      border-radius: 100px;
-      background: rgba(34,197,94,.1);
-      border: 1px solid rgba(34,197,94,.3);
-      color: #4ade80;
-      font-size: 0.85rem;
+      justify-content: space-between;
+      padding: 1.5rem 2rem;
+      background: rgba(233,30,99,.05);
+      border: 1px solid rgba(233,30,99,.15);
+      border-radius: 12px;
+      transition: transform 0.3s;
+    }
+    .rank-item:hover {
+      transform: translateX(10px);
+      background: rgba(233,30,99,.1);
+      border-color: rgba(233,30,99,.3);
+    }
+    .rank-1 {
+      border-color: rgba(255,215,64,.4);
+      background: rgba(255,215,64,.08);
+      box-shadow: 0 0 20px rgba(255,215,64,.1);
+    }
+    .rank-2 {
+      border-color: rgba(148,163,184,.4);
+      background: rgba(148,163,184,.08);
+    }
+    .rank-3 {
+      border-color: rgba(205,127,50,.4);
+      background: rgba(205,127,50,.08);
+    }
+    .rank-info {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .rank-number {
+      font-family: var(--font-d);
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--textmut);
+    }
+    .rank-1 .rank-number { color: var(--gold); text-shadow: 0 0 10px rgba(255,215,64,.5); }
+    .rank-2 .rank-number { color: #94a3b8; }
+    .rank-3 .rank-number { color: #cd7f32; }
+    
+    .participant-details {
+      display: flex;
+      flex-direction: column;
+    }
+    .participant-name {
+      font-size: 1.2rem;
       font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 2rem;
+      color: var(--text);
+      letter-spacing: 0.05em;
     }
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #4ade80;
-      box-shadow: 0 0 8px #4ade80;
-      animation: blink 1.5s infinite;
+    .ranking-score {
+      font-family: var(--font-d);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--cherry2);
     }
+    .rank-1 .ranking-score { color: var(--gold); }
+    .rank-2 .ranking-score { color: #94a3b8; }
+    .rank-3 .ranking-score { color: #cd7f32; }
+
     .event-info-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1.5rem;
       width: 100%;
+      max-width: 800px;
       margin-bottom: 3rem;
-      text-align: left;
     }
     .info-box {
       background: rgba(0,0,0,.3);
       border: 1px solid var(--gborder);
       border-radius: 12px;
       padding: 1.5rem;
+      text-align: center;
     }
     .info-box-title {
       font-size: 0.75rem;
@@ -93,18 +132,44 @@
       margin-bottom: 0.5rem;
     }
     .info-box-value {
-      font-size: 1.1rem;
-      font-weight: 600;
+      font-size: 1.2rem;
+      font-weight: 700;
       color: var(--text);
     }
-    .updates-notice {
-      padding: 1.5rem;
-      background: rgba(233,30,99,.05);
-      border: 1px dashed rgba(233,30,99,.3);
-      border-radius: 12px;
+    .congratulations-msg {
+      text-align: center;
+      font-family: var(--font-h);
+      font-size: 1.5rem;
       font-style: italic;
       color: var(--text2);
-      line-height: 1.6;
+      margin-top: 2.5rem;
+    }
+    .coord-list-results {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .coord-list-results li {
+      background: rgba(233,30,99,.05);
+      border: 1px solid rgba(233,30,99,.15);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+    @media(max-width: 768px) {
+      .rank-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .ranking-score {
+        align-self: flex-end;
+      }
     }
   </style>
 </head>
@@ -144,106 +209,81 @@
     </button>
   </nav>
 
-  <!-- ALGOQUEST DETAILS SECTION -->
-  <section class="details-section container">
-    <div class="section-label" style="margin-top:2rem;">// EVENT DETAILS</div>
+  <!-- ALGOQUEST RESULTS SECTION -->
+  <section class="results-section container">
+    <div class="section-label" style="margin-top: 2rem;">// EVENT COMPLETION & RESULTS</div>
     
-    <div class="upcoming-card reveal">
-      <div class="status-badge">
-        <span class="status-dot"></span>
-        Registrations Open
+    <div class="event-info-grid reveal">
+      <div class="info-box">
+        <div class="info-box-title">Event Status</div>
+        <div class="info-box-value" style="color:var(--textmut);">Closed</div>
       </div>
+      <div class="info-box">
+        <div class="info-box-title">Platform</div>
+        <div class="info-box-value">HackerRank</div>
+      </div>
+      <div class="info-box">
+        <div class="info-box-title">Participation</div>
+        <div class="info-box-value">Successful</div>
+      </div>
+    </div>
+
+    <div class="leaderboard-card reveal">
+      <h2 class="leaderboard-title">AlgoQuest Leaderboard</h2>
+      <p style="text-align:center; color:var(--text2); margin-bottom: 2rem; font-size: 0.9rem;">Final Ranking from the competitive programming event.</p>
       
-      <h2 class="upcoming-title">AlgoQuest</h2>
-      <p class="upcoming-subtitle">The ultimate Coding Arena. Solve algorithmic challenges, test your logic, and climb to the top of the leaderboard.</p>
-      
-      <div class="event-info-grid">
-        <div class="info-box">
-          <div class="info-box-title">Date</div>
-          <div class="info-box-value">27 March 2026</div>
+      <div class="rank-list">
+        <!-- Rank 1 -->
+        <div class="rank-item rank-1">
+          <div class="rank-info">
+            <div class="rank-number">1</div>
+            <div class="participant-details">
+              <span class="participant-name">Mehebub Sarkar</span>
+            </div>
+          </div>
+          <div class="ranking-score">
+            Winner 🏆
+          </div>
         </div>
-        <div class="info-box">
-          <div class="info-box-title">Time</div>
-          <div class="info-box-value">11:30 AM onwards</div>
+        
+        <!-- Rank 2 -->
+        <div class="rank-item rank-2">
+          <div class="rank-info">
+            <div class="rank-number">2</div>
+            <div class="participant-details">
+              <span class="participant-name">Sahil Alom Choudhary</span>
+            </div>
+          </div>
+          <div class="ranking-score">
+            Runner-Up 🥈
+          </div>
         </div>
-        <div class="info-box">
-          <div class="info-box-title">Venue</div>
-          <div class="info-box-value">CSE Classroom</div>
-        </div>
-        <div class="info-box">
-          <div class="info-box-title">Platform</div>
-          <div class="info-box-value">HackerRank</div>
+        
+        <!-- Rank 3 -->
+        <div class="rank-item rank-3">
+          <div class="rank-info">
+            <div class="rank-number">3</div>
+            <div class="participant-details">
+              <span class="participant-name">Budhideep Teli</span>
+            </div>
+          </div>
+          <div class="ranking-score">
+            2nd Runner-Up 🥉
+          </div>
         </div>
       </div>
 
-      <!-- ALGOQUEST COUNTDOWN -->
-      <div class="cd-wrap cd-algo" id="cd-algo-wrap" style="text-align:left; margin-bottom: 2.5rem;">
-        <div class="cd-header">
-          <span class="cd-dot cd-dot-algo"></span>
-          <span class="cd-label" id="cd-algo-label">Event starts in</span>
-        </div>
-        <div class="cd-units">
-          <div class="cd-unit">
-            <span class="cd-val cd-val-algo" id="cd-a-d">00</span>
-            <span class="cd-lbl">Days</span>
-          </div>
-          <span class="cd-sep cd-sep-algo">:</span>
-          <div class="cd-unit">
-            <span class="cd-val cd-val-algo" id="cd-a-h">00</span>
-            <span class="cd-lbl">Hours</span>
-          </div>
-          <span class="cd-sep cd-sep-algo">:</span>
-          <div class="cd-unit">
-            <span class="cd-val cd-val-algo" id="cd-a-m">00</span>
-            <span class="cd-lbl">Mins</span>
-          </div>
-          <span class="cd-sep cd-sep-algo">:</span>
-          <div class="cd-unit">
-            <span class="cd-val cd-val-algo" id="cd-a-s">00</span>
-            <span class="cd-lbl">Secs</span>
-          </div>
-        </div>
-      </div>
+      <p class="congratulations-msg">A big thank you to all the participants for your energy and outstanding performance. You made the event a huge success!</p>
 
-      <p class="ev-desc" style="text-align:left; margin-bottom: 2rem;">A DSA and algorithms challenge where participants solve multiple coding problems under time pressure. Ranked by problems solved then completion time. Winners receive <strong class="cherry-text">Trophies &amp; Certificates</strong>.</p>
-      
-      <div class="pb-card algo-pb" style="text-align:left; margin-bottom: 2.5rem;">
-        <div class="pb-item gold"><span class="pbr">1st</span><span class="pba">₹1,500</span></div>
-        <div class="pb-item silver"><span class="pbr">2nd</span><span class="pba">₹1,000</span></div>
-        <div class="pb-item bronze"><span class="pbr">3rd</span><span class="pba">₹500</span></div>
-        <div class="pb-item cert"><span class="pbr">All</span><span class="pba">Certificates</span></div>
-      </div>
-      
-      <div class="details-grid" style="text-align:left; margin-bottom: 3rem;">
-        <div class="dc"><h4 class="dt">Rules & Judging</h4>
-          <ul class="rules-list">
-            <li><span class="ri">◈</span> Score = test cases passed per challenge</li>
-            <li><span class="ri">◈</span> Highest score from multiple submissions counts</li>
-            <li><span class="ri">◈</span> Tie-breaker: shortest total time to final high score</li>
-            <li><span class="ri">◈</span> Strictly NO plagiarism</li>
-            <li><span class="ri">◈</span> NO external AI tools — instant disqualification</li>
-            <li><span class="ri">◈</span> Bring valid College ID</li>
-          </ul>
-        </div>
-        <div class="dc"><h4 class="dt">Registration</h4>
-          <ul class="reg-list">
-            <li><span class="free-badge">FREE</span> BVEC Students</li>
-            <li><span class="fee-badge">FEE</span> Outside Participants</li>
-          </ul>
-          <h4 class="dt" style="margin-top:1.5rem">Coordinators</h4>
-          <ul class="coord-list">
-            <li><span class="cn">Vivek Dubey</span><a href="tel:+916002265204" class="cp">+91 60022 65204</a></li>
-            <li><span class="cn">Abhishek Mazumder</span><a href="tel:+918822344140" class="cp">+91 88223 44140</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="updates-notice" style="text-align:left;">
-        Updates regarding participants, specific rounds, results and standings will be active and available soon here. Stay tuned!
-      </div>
-
-      <div class="card-footer" style="padding-top: 2rem; border-top: 1px solid var(--gborder); margin-top: 2rem;">
-        <a href="https://forms.gle/cGGcHwJPsMgySq1JA" target="_blank" rel="noopener" class="btn btn-cherry btn-full" id="register-algo">Register for AlgoQuest <span class="ba">→</span><span class="btn-glow"></span></a>
+      <div style="margin-top: 3rem; text-align: center;">
+        <h3 style="color: var(--cherry2); font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Student Co-ordinators</h3>
+        <ul class="coord-list-results">
+          <li>Anupam Saha</li>
+          <li>Vivek Dubey (main)</li>
+          <li>Abhishek Mazumder (main)</li>
+          <li>Deepraj Singha</li>
+          <li>Aditya Kumar</li>
+        </ul>
       </div>
     </div>
 
